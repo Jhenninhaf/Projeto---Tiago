@@ -9,8 +9,8 @@ import jakarta.persistence.Table;
 import java.util.UUID;
 
 @Entity
-@Table(name = "livros")
-public class Book {
+@Table(name = "canetas")
+public class CanetaJava {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,19 +20,19 @@ public class Book {
     @Column(name = "nome", nullable = false)
     private String name;
 
-    @Column(name = "autor", nullable = false)
-    private String author;
+    @Column(name = "cor", nullable = false)
+    private String color;
 
     @Column(name = "valor", nullable = false)
     private double valor;
 
-    public Book(String name, String author, double valor) {
+    public CanetaJava(String name, String color, double valor) {
         this.name = name;
-        this.author = author;
+        this.color = color;
         this.valor = valor;
     }
 
-    public Book() {}
+    public CanetaJava() {}
 
     public UUID getId() {
         return id;
@@ -50,12 +50,12 @@ public class Book {
         this.name = name;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getColor() {
+        return color;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public double getValor() {
@@ -68,11 +68,12 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Livro{" +
+        return "Caneta{" +
                 "id=" + id +
                 ", nome='" + name + '\'' +
-                ", autor='" + author + '\'' +
+                ", cor='" + color + '\'' +
                 ", valor=" + valor +
                 '}';
     }
+
 }

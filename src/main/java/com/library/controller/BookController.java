@@ -1,32 +1,47 @@
+package com.library.controller;
+
 import com.library.domain.Book;
-import com.library.repositories.BookRepository;
-import org.springframework.stereotype.Service;
+import com.library.services.BookService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 
-@Service
-public class BookService {
+@RestController
+@RequestMapping("/books")
+public class BookController {
 
-    private final BookRepository bookRepository;
+    private final BookService bookService;
 
-    public BookService(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
+    @Autowired
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
     }
 
-    public Book createBook(Book book) {
-        return bookRepository.save(book);
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Book createBook(@RequestBody Book book) {
+        return bookService.createBook(book);
     }
 
+
+    @GetMapping
     public List<Book> getAllBooks() {
-        return bookRepository.findAll();
+        return bookService.getAllBooks();
     }
 
-    public void deleteBook(UUID id) {
-        if (bookRepository.existsById(id)) {
-            bookRepository.deleteById(id);
-        } else {
-            throw new IllegalArgumentException("Livro não encontrado com ID: " + id);
-        }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteBook(@PathVariable UUID id) {
+        bookService.deleteBook(id);
     }
+
+    @PutMapping("/{id}/update-valor")
+    public ResponseEntity<Book> updateValor(@PathVariable UUID id, @RequestBody Book book) {
+        return ResponseEntity.ok(bookService.updateValor(id, book.getValor()));
+    }
+
 }
