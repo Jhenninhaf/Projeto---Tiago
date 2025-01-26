@@ -1,5 +1,6 @@
 package com.library.controller;
 
+import com.library.DTO.BookDTO;
 import com.library.domain.Book;
 import com.library.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +21,11 @@ public class BookController {
     public BookController(BookService bookService) {
         this.bookService = bookService;
     }
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Book createBook(@RequestBody Book book) {
-        return bookService.createBook(book);
+    public Book createBook(@RequestBody BookDTO bookDTO) {
+        return bookService.createBook(bookDTO);
     }
-
 
     @GetMapping
     public List<Book> getAllBooks() {
@@ -37,11 +36,6 @@ public class BookController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteBook(@PathVariable UUID id) {
         bookService.deleteBook(id);
-    }
-
-    @PutMapping("/{id}/update-valor")
-    public ResponseEntity<Book> updateValor(@PathVariable UUID id, @RequestBody Book book) {
-        return ResponseEntity.ok(bookService.updateValor(id, book.getValor()));
     }
 
 }

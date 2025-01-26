@@ -5,7 +5,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.UUID;
 
 public record BookDTO(
-        UUID id,
 
         @NotNull
         String name,
@@ -14,7 +13,7 @@ public record BookDTO(
         String author,
 
         @NotNull
-        double valor,
+        Double valor,
 
         @NotNull
         int quantity

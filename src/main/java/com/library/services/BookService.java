@@ -1,10 +1,13 @@
 package com.library.services;
 
-import com.library.Exceptions.CanetaIdNotFoundExeption;
-import com.library.Exceptions.bookIdNotFoundException;
+import com.library.DTO.BookDTO;
 import com.library.domain.Book;
 import com.library.repositories.BookRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 import java.util.UUID;
@@ -22,21 +25,24 @@ public class BookService {
         return bookRepository.findAll();
     }
 
-    public Book createBook(Book book) {
+    public Book getBookById(UUID id) {
+        return bookRepository.findById(id).orElseThrow(() -> new RuntimeException("Book not found"));
+    }
+
+    public Book createBook(BookDTO bookDTO) {
+        Book book = new Book(
+                bookDTO.name(),
+                bookDTO.author(),
+                bookDTO.valor(),
+                bookDTO.quantity()
+        );
+
         return bookRepository.save(book);
     }
 
+
     public void deleteBook(UUID id) {
-        if (!bookRepository.existsById(id)) {
-            throw new bookIdNotFoundException("Livro com ID " + id + " não encontrado.");
-        }
         bookRepository.deleteById(id);
     }
 
-    public Book updateValor(UUID id, double valor) {
-        Book book = bookRepository.findById(id).orElseThrow(() ->
-                new bookIdNotFoundException("Livro com ID " + id + " não encontrado."));
-        book.setValor(valor);
-        return bookRepository.save(book);
-    }
 }

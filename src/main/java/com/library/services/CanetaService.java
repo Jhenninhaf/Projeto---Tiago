@@ -1,10 +1,8 @@
 package com.library.services;
 
-import com.library.Exceptions.CanetaIdNotFoundExeption;
+import com.library.DTO.CanetaDTO;
 import com.library.domain.CanetaJava;
 import com.library.repositories.CanetaRepository;
-import com.library.Exceptions.bookIdNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,30 +13,34 @@ public class CanetaService {
 
     private final CanetaRepository canetaRepository;
 
-    @Autowired
     public CanetaService(CanetaRepository canetaRepository) {
         this.canetaRepository = canetaRepository;
     }
 
-    public List<CanetaJava> getAllCanetas() {
+    public List<CanetaJava> getAllPens() {
         return canetaRepository.findAll();
     }
 
-    public CanetaJava createCaneta(CanetaJava canetaJava) {
-        return canetaRepository.save(canetaJava);
+    public CanetaJava getPenById(UUID id) {
+        return canetaRepository.findById(id).orElseThrow(() -> new RuntimeException("Caneta não encontrada"));
     }
 
-    public void deleteCaneta(UUID id) {
-        if (!canetaRepository.existsById(id)) {
-            throw new CanetaIdNotFoundExeption("Caneta com ID " + id + " não encontrada.");
-        }
+    public CanetaJava createPen(CanetaDTO canetaDTO) {
+
+        CanetaJava caneta = new CanetaJava(
+                canetaDTO.name(),
+                canetaDTO.color(),
+                canetaDTO.valor(),
+                canetaDTO.quantity()
+        );
+
+        return canetaRepository.save(caneta);
+    }
+
+
+
+
+    public void deletePen(UUID id) {
         canetaRepository.deleteById(id);
-    }
-
-    public CanetaJava updateValor(UUID id, double valor) {
-        CanetaJava canetaJava = canetaRepository.findById(id).orElseThrow(() ->
-                new CanetaIdNotFoundExeption("Caneta com ID " + id + " não encontrada."));
-        canetaJava.setValor(valor);
-        return canetaRepository.save(canetaJava);
     }
 }

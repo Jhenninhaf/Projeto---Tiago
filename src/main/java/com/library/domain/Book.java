@@ -6,6 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.UUID;
 
 @Entity
@@ -26,13 +28,21 @@ public class Book {
     @Column(name = "valor", nullable = false)
     private double valor;
 
-    public Book(String name, String author, double valor) {
+    @Column(name = "quantidade", nullable = false, columnDefinition = "integer default 0")
+    private int quantity;
+
+
+    public Book(String name, String author, double valor, int quantity) {
         this.name = name;
         this.author = author;
         this.valor = valor;
+        this.quantity = quantity;
     }
 
     public Book() {}
+
+    public Book(UUID id, @NotNull String name, @NotNull String author, @NotNull double valor, @NotNull int quantity) {
+    }
 
     public UUID getId() {
         return id;
@@ -66,6 +76,14 @@ public class Book {
         this.valor = valor;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     @Override
     public String toString() {
         return "Livro{" +
@@ -73,6 +91,7 @@ public class Book {
                 ", nome='" + name + '\'' +
                 ", autor='" + author + '\'' +
                 ", valor=" + valor +
+                ", quantidade=" + quantity +
                 '}';
     }
 }

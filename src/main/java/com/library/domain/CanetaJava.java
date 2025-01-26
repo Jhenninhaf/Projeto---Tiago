@@ -26,10 +26,15 @@ public class CanetaJava {
     @Column(name = "valor", nullable = false)
     private double valor;
 
-    public CanetaJava(String name, String color, double valor) {
+    @Column(name = "quantidade", nullable = false, columnDefinition = "integer default 0")
+    private int quantity;
+
+
+    public CanetaJava(String name, String color, double valor, int quantity) {
         this.name = name;
         this.color = color;
         this.valor = valor;
+        this.quantity = quantity;
     }
 
     public CanetaJava() {}
@@ -66,6 +71,14 @@ public class CanetaJava {
         this.valor = valor;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     @Override
     public String toString() {
         return "Caneta{" +
@@ -73,7 +86,7 @@ public class CanetaJava {
                 ", nome='" + name + '\'' +
                 ", cor='" + color + '\'' +
                 ", valor=" + valor +
+                ", quantidade=" + quantity +
                 '}';
     }
-
 }
