@@ -22,3 +22,5 @@ public record CanetaDTO(
         @NotNull
         int quantity
 ) {}
+
+// TODO - Remover esse import, quero @Notnull com outro import

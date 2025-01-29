@@ -8,3 +8,4 @@ import java.util.UUID;
 public interface BookRepository extends JpaRepository<Book, UUID> {
     List<Book> findByQuantityGreaterThan(int quantity);
 }
+// TODO - Remover esse metodo

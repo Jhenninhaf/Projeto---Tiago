@@ -1,8 +1,7 @@
-package DTO;
+package com.library.DTO;
 
-import org.jetbrains.annotations.NotNull;
 
-import java.util.UUID;
+import org.antlr.v4.runtime.misc.NotNull;
 
 public record BookDTO(
 
@@ -18,3 +17,5 @@ public record BookDTO(
         @NotNull
         int quantity
 ) {}
+
+// TODO - Remover esse import, quero o @NotNull com outro import

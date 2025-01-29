@@ -8,3 +8,5 @@ import java.util.UUID;
 public interface CanetaRepository extends JpaRepository<CanetaJava, UUID> {
     List<CanetaJava> findByQuantityGreaterThan(int quantity);
 }
+
+// TODO - Remover Esse metodo
