@@ -1,7 +1,7 @@
 package com.library.DTO;
 
 
-import org.antlr.v4.runtime.misc.NotNull;
+import org.jetbrains.annotations.NotNull;
 
 public record BookDTO(
 
@@ -18,4 +18,3 @@ public record BookDTO(
         int quantity
 ) {}
 
-// TODO - Remover esse import, quero o @NotNull com outro import

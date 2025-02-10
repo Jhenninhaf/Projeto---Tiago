@@ -1,8 +1,8 @@
 package com.library.repositories;
 
-import com.library.domain.Caneta;
+import com.library.Client.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 
-public interface CanetaRepository extends JpaRepository<Caneta, UUID> {
+public interface ClientRepository extends JpaRepository<Client, UUID> {
 }

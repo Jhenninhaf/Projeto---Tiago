@@ -1,7 +1,9 @@
 package com.library.services;
 
+import com.library.Client.Client;
 import com.library.DTO.CanetaDTO;
-import com.library.domain.CanetaJava;
+import com.library.DTO.ClientDTO;
+import com.library.domain.Caneta;
 import com.library.repositories.CanetaRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,38 +13,46 @@ import java.util.UUID;
 @Service
 public class CanetaService {
 
-    private final CanetaRepository canetaRepository;
+    private static CanetaRepository canetaRepository;
 
     public CanetaService(CanetaRepository canetaRepository) {
         this.canetaRepository = canetaRepository;
     }
 
-    public List<CanetaJava> getAllPens() {
+    public List<Caneta> getAllPens() {
         return canetaRepository.findAll();
     }
 
-    public CanetaJava getPenById(UUID id) {
-        return canetaRepository.findById(id).orElseThrow(() -> new RuntimeException("Caneta não encontrada"));
+    public Caneta getPenById(UUID id) {
+        return canetaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Caneta não encontrada"));
     }
 
-    public CanetaJava createPen(CanetaDTO canetaDTO) {
-
-        CanetaJava caneta = new CanetaJava(
+    public Caneta createPen(CanetaDTO canetaDTO) {
+        Caneta caneta = new Caneta(
                 canetaDTO.name(),
                 canetaDTO.color(),
                 canetaDTO.valor(),
                 canetaDTO.quantity()
         );
+        return canetaRepository.save(caneta);
+    }
+
+    public void deletePen(UUID id) {
+        canetaRepository.deleteById(id);
+    }
+
+    public static Caneta updateCaneta(UUID id, CanetaDTO canetaDTO) {
+        Caneta caneta = canetaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Caneta não encontrada"));
+
+        caneta.setName(canetaDTO.name());
+        caneta.setColor(canetaDTO.color());
+        caneta.setValor(canetaDTO.valor());
+        caneta.setQuantity(canetaDTO.quantity());
 
         return canetaRepository.save(caneta);
     }
 
 
-
-
-    public void deletePen(UUID id) {
-        canetaRepository.deleteById(id);
-    }
 }
-
-// TODO - Arrumar organizacao do codigo

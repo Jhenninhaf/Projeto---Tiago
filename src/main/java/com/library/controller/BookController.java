@@ -38,6 +38,11 @@ public class BookController {
         bookService.deleteBook(id);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Book> updateBook(@PathVariable UUID id, @RequestBody BookDTO bookDTO) {
+        return null;
+    }
+
+
 }
 
-// TODO - Remover import nao usados

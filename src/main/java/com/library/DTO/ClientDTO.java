@@ -2,19 +2,14 @@ package com.library.DTO;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.UUID;
-
-public record CanetaDTO(
+public record ClientDTO(
 
         @NotNull
         String name,
 
         @NotNull
-        String color,
+        String address,
 
         @NotNull
-        Double valor,
-
-        @NotNull
-        int quantity
-) {}
+        String birthDate
+){}

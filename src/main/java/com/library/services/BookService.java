@@ -3,11 +3,7 @@ package com.library.services;
 import com.library.DTO.BookDTO;
 import com.library.domain.Book;
 import com.library.repositories.BookRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 import java.util.UUID;
@@ -26,7 +22,8 @@ public class BookService {
     }
 
     public Book getBookById(UUID id) {
-        return bookRepository.findById(id).orElseThrow(() -> new RuntimeException("Book not found"));
+        return bookRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Book not found"));
     }
 
     public Book createBook(BookDTO bookDTO) {
@@ -36,15 +33,10 @@ public class BookService {
                 bookDTO.valor(),
                 bookDTO.quantity()
         );
-
         return bookRepository.save(book);
     }
-
 
     public void deleteBook(UUID id) {
         bookRepository.deleteById(id);
     }
-
 }
-
-// TODO - Remover import nao usados e organizacao

@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "canetas")
-public class CanetaJava {
+public class Caneta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,14 +30,14 @@ public class CanetaJava {
     private int quantity;
 
 
-    public CanetaJava(String name, String color, double valor, int quantity) {
+    public Caneta(String name, String color, double valor, int quantity) {
         this.name = name;
         this.color = color;
         this.valor = valor;
         this.quantity = quantity;
     }
 
-    public CanetaJava() {}
+    public Caneta() {}
 
     public UUID getId() {
         return id;
@@ -90,5 +90,3 @@ public class CanetaJava {
                 '}';
     }
 }
-
-// TODO - Trocar nome, tirar java

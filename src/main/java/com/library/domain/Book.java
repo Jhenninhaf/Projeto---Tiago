@@ -1,13 +1,6 @@
 package com.library.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import org.jetbrains.annotations.NotNull;
-
+import jakarta.persistence.*;
 import java.util.UUID;
 
 @Entity
@@ -28,9 +21,8 @@ public class Book {
     @Column(name = "valor", nullable = false)
     private double valor;
 
-    @Column(name = "quantidade", nullable = false, columnDefinition = "integer default 0")
+    @Column(name = "quantity", nullable = false, columnDefinition = "integer default 0")
     private int quantity;
-
 
     public Book(String name, String author, double valor, int quantity) {
         this.name = name;
@@ -41,7 +33,12 @@ public class Book {
 
     public Book() {}
 
-    public Book(UUID id, @NotNull String name, @NotNull String author, @NotNull double valor, @NotNull int quantity) {
+    public Book(UUID id, String name, String author, double valor, int quantity) {
+        this.id = id;
+        this.name = name;
+        this.author = author;
+        this.valor = valor;
+        this.quantity = quantity;
     }
 
     public UUID getId() {
@@ -91,10 +88,7 @@ public class Book {
                 ", nome='" + name + '\'' +
                 ", autor='" + author + '\'' +
                 ", valor=" + valor +
-                ", quantidade=" + quantity +
+                ", quantity=" + quantity +
                 '}';
     }
 }
-
-// TODO - Remover import nao usados
-// TODO - Arrumar import do @NotNull
