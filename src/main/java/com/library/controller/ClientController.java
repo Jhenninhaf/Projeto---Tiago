@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/clients")
@@ -31,17 +30,17 @@ public class ClientController {
     }
 
     @GetMapping("/{id}")
-    public Client getClientById(@PathVariable UUID id) {
+    public Client getClientById(@PathVariable Long id) {
         return clientService.getClientById(id);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteClient(@PathVariable UUID id) {
+    public void deleteClient(@PathVariable Long id) {
         clientService.deleteClient(id);
     }
 
     @PutMapping("/{id}")
-    public Client updateClient(@PathVariable UUID id, @RequestBody ClientDTO clientDTO) {
+    public Client updateClient(@PathVariable Long id, @RequestBody ClientDTO clientDTO) {
         return clientService.updateClient(id, clientDTO);
     }
 }

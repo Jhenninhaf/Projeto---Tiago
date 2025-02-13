@@ -6,7 +6,6 @@ import com.library.repositories.ClientRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class ClientService {
@@ -21,31 +20,29 @@ public class ClientService {
         return clientRepository.findAll();
     }
 
-    public Client getClientById(UUID id) {
+    public Client getClientById(Long id) {
         return clientRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
     }
 
     public Client createClient(ClientDTO clientDTO) {
         Client client = new Client(
-                clientDTO.name(),
-                clientDTO.address(),
-                clientDTO.birthDate()
+                clientDTO.login(),
+                clientDTO.password()
         );
         return clientRepository.save(client);
     }
 
-    public void deleteClient(UUID id) {
+    public void deleteClient(Long id) {
         clientRepository.deleteById(id);
     }
 
-    public Client updateClient(UUID id, ClientDTO clientDTO) {
+    public Client updateClient(Long id, ClientDTO clientDTO) {
         Client client = clientRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
 
-        client.setName(clientDTO.name());
-        client.setAddress(clientDTO.address());
-        client.setBirthDate(clientDTO.birthDate());
+        client.setLogin(clientDTO.login());
+        client.setPassword(clientDTO.password());
 
         return clientRepository.save(client);
     }

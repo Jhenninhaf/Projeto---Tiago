@@ -1,7 +1,6 @@
 package com.library.Client;
 
 import jakarta.persistence.*;
-import java.util.UUID;
 
 @Entity
 @Table(name = "clients")
@@ -10,64 +9,51 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
-    private UUID id;
+    private Long id;
 
-    @Column(name = "nome", nullable = false)
-    private String name;
+    @Column(name = "login", nullable = false)
+    private String login;
 
-    @Column(name = "address", nullable = false)
-    private String address;
+    @Column(name = "password", nullable = false)
+    private String password;
 
-    @Column(name = "birthDate", nullable = false)
-    private String birthDate;
-
-    public Client(String name, String address, String birthDate) {
-        this.name = name;
-        this.address = address;
-        this.birthDate = birthDate;
+    public Client(String login, String password) {
+        this.login = login;
+        this.password = password;
     }
 
     public Client() {}
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getLogin() {
+        return login;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
-    public String getAddress() {
-        return address;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
     public String toString() {
         return "Client{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", birthDate='" + birthDate + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }
