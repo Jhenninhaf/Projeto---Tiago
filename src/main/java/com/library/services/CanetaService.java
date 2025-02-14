@@ -1,8 +1,6 @@
 package com.library.services;
 
-import com.library.Client.Client;
 import com.library.DTO.CanetaDTO;
-import com.library.DTO.ClientDTO;
 import com.library.domain.Caneta;
 import com.library.repositories.CanetaRepository;
 import org.springframework.stereotype.Service;

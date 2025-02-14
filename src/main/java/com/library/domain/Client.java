@@ -1,4 +1,4 @@
-package com.library.Client;
+package com.library.domain;
 
 import jakarta.persistence.*;
 

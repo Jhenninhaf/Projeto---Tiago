@@ -1,7 +1,7 @@
 package com.library.services;
 
 import com.library.DTO.ClientDTO;
-import com.library.Client.Client;
+import com.library.domain.Client;
 import com.library.repositories.ClientRepository;
 import org.springframework.stereotype.Service;
 

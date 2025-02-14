@@ -1,7 +1,7 @@
 package com.library.controller;
 
 import com.library.DTO.ClientDTO;
-import com.library.Client.Client;
+import com.library.domain.Client;
 import com.library.services.ClientService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
