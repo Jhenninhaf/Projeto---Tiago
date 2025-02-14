@@ -15,12 +15,9 @@ import java.util.UUID;
 @RequestMapping("/books")
 public class BookController {
 
-    private final BookService bookService;
-
     @Autowired
-    public BookController(BookService bookService) {
-        this.bookService = bookService;
-    }
+    private BookService bookService;
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Book createBook(@RequestBody BookDTO bookDTO) {
@@ -28,6 +25,7 @@ public class BookController {
     }
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
@@ -39,8 +37,9 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Book> updateBook(@PathVariable UUID id, @RequestBody BookDTO bookDTO) {
-        return null;
+    @ResponseStatus(HttpStatus.OK)
+    public Book updateBook(@PathVariable UUID id, @RequestBody BookDTO bookDTO) {
+        return bookService.updateBook(id, bookDTO);
     }
 
 

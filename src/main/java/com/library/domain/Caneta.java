@@ -6,9 +6,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.*;
+
 import java.util.UUID;
 
+@Builder
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "canetas")
 public class Caneta {
 
@@ -29,64 +36,4 @@ public class Caneta {
     @Column(name = "quantidade", nullable = false, columnDefinition = "integer default 0")
     private int quantity;
 
-
-    public Caneta(String name, String color, double valor, int quantity) {
-        this.name = name;
-        this.color = color;
-        this.valor = valor;
-        this.quantity = quantity;
-    }
-
-    public Caneta() {}
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public double getValor() {
-        return valor;
-    }
-
-    public void setValor(double valor) {
-        this.valor = valor;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    @Override
-    public String toString() {
-        return "Caneta{" +
-                "id=" + id +
-                ", nome='" + name + '\'' +
-                ", cor='" + color + '\'' +
-                ", valor=" + valor +
-                ", quantidade=" + quantity +
-                '}';
-    }
 }

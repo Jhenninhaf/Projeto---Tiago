@@ -1,42 +1,50 @@
 package com.library.services;
 
 import com.library.DTO.BookDTO;
+import com.library.Exceptions.BookIdNotFoundException;
 import com.library.domain.Book;
 import com.library.repositories.BookRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class BookService {
 
-    private final BookRepository bookRepository;
+    @Autowired
+    private BookRepository bookRepository;
 
-    public BookService(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
+    public Book createBook(BookDTO bookDTO) {
+        Book book = Book.builder()
+                .name(bookDTO.name())
+                .author(bookDTO.author())
+                .valor(bookDTO.valor())
+                .quantity(bookDTO.quantity())
+                .build();
+        return bookRepository.save(book);
     }
 
     public List<Book> getAllBooks() {
         return bookRepository.findAll();
     }
 
-    public Book getBookById(UUID id) {
-        return bookRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Book not found"));
-    }
-
-    public Book createBook(BookDTO bookDTO) {
-        Book book = new Book(
-                bookDTO.name(),
-                bookDTO.author(),
-                bookDTO.valor(),
-                bookDTO.quantity()
-        );
-        return bookRepository.save(book);
-    }
-
     public void deleteBook(UUID id) {
         bookRepository.deleteById(id);
     }
+
+    public Book updateBook(UUID id, BookDTO bookDTO) {
+        Book book = bookRepository.findById(id).orElseThrow(() -> new BookIdNotFoundException(bookDTO));
+         book.setAuthor(bookDTO.author());
+         book.setName(bookDTO.name());
+         book.setValor(bookDTO.valor());
+         book.setQuantity(bookDTO.quantity());
+        return book;
+    }
+
+    // fazer um put - update
+
 }

@@ -26,10 +26,10 @@ public class ClientService {
     }
 
     public Client createClient(ClientDTO clientDTO) {
-        Client client = new Client(
-                clientDTO.login(),
-                clientDTO.password()
-        );
+        Client client = Client.builder()
+                .login(clientDTO.login())
+                .password(clientDTO.password())
+                .build();
         return clientRepository.save(client);
     }
 

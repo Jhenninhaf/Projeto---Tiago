@@ -17,23 +17,18 @@ public class CanetaService {
         this.canetaRepository = canetaRepository;
     }
 
+    public Caneta createPen(CanetaDTO canetaDTO) {
+        Caneta caneta = Caneta.builder()
+                .name(canetaDTO.name())
+                .color(canetaDTO.color())
+                .valor(canetaDTO.valor())
+                .quantity(canetaDTO.quantity())
+                .build();
+        return canetaRepository.save(caneta);
+    }
+
     public List<Caneta> getAllPens() {
         return canetaRepository.findAll();
-    }
-
-    public Caneta getPenById(UUID id) {
-        return canetaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Caneta não encontrada"));
-    }
-
-    public Caneta createPen(CanetaDTO canetaDTO) {
-        Caneta caneta = new Caneta(
-                canetaDTO.name(),
-                canetaDTO.color(),
-                canetaDTO.valor(),
-                canetaDTO.quantity()
-        );
-        return canetaRepository.save(caneta);
     }
 
     public void deletePen(UUID id) {
