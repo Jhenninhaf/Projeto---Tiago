@@ -45,6 +45,4 @@ public class BookService {
         return book;
     }
 
-    // fazer um put - update
-
 }

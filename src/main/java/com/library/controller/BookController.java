@@ -42,6 +42,4 @@ public class BookController {
         return bookService.updateBook(id, bookDTO);
     }
 
-
 }
-
